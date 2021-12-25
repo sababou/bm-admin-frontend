@@ -4,6 +4,7 @@ import MemberItem from "./components/MemberItem";
 
 import Navbar from "../../layout/Navbar";
 import { useParams } from "react-router";
+import axios from "axios";
 
 function StaffMembers() {
   const params = useParams();
@@ -22,6 +23,28 @@ function StaffMembers() {
     },
   ]);
 
+  const getMemberList = () => {
+    axios
+      .get("/api/staff_member/list?role=" + getRoleParamQuery(params.role))
+      .then((res) => {
+        let data = res.data;
+        if (data.status === "OK") {
+          console.log(data);
+          setMembers(data.users);
+        } else {
+          console.log(data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getMemberList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -39,5 +62,37 @@ function StaffMembers() {
     </>
   );
 }
+
+const getRoleParamQuery = (param) => {
+  let queryParameter = null;
+
+  switch (param) {
+    case "validation":
+      queryParameter = "ROLE_VALIDATION";
+      break;
+
+    case "shipping":
+      queryParameter = "ROLE_SHIPPING";
+      break;
+
+    case "delivery":
+      queryParameter = "ROLE_DELIVERY";
+      break;
+
+    case "return":
+      queryParameter = "ROLE_RETURN";
+      break;
+
+    case "cancelation":
+      queryParameter = "ROLE_CANCELATION";
+      break;
+
+    default:
+      queryParameter = null;
+      break;
+  }
+
+  return queryParameter;
+};
 
 export default StaffMembers;

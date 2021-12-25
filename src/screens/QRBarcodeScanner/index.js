@@ -8,9 +8,9 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 
 function QRBarcodeScanner() {
-  const [data, setData] = React.useState("Not Found");
+  const orderFormState = useSelector((state) => state.orderForm);
 
-  const scannerData = useSelector((state) => state.scanner);
+  const formContent = orderFormState.formContent;
 
   const history = useHistory();
 
@@ -18,7 +18,23 @@ function QRBarcodeScanner() {
 
   const params = useParams();
 
-  console.log(scannerData);
+  const updateOrderNumber = (orderNumber) => {
+    let _orderNumber = orderNumber;
+    let _orderId = "";
+    if (orderNumber && orderNumber.split("-").length === 3) {
+      _orderId = orderNumber.split("-")[2];
+    } else {
+      _orderId = "";
+    }
+    dispatch({
+      type: "SET_ORDER_FORM_CONTENT",
+      payload: {
+        ...formContent,
+        _order_id: _orderId,
+        _order_number: _orderNumber,
+      },
+    });
+  };
 
   return (
     <>
@@ -29,11 +45,17 @@ function QRBarcodeScanner() {
           if (result) {
             switch (params.object) {
               case "orderNumber":
-                dispatch({ type: "SET_ORDER_NUMBER", payload: result.text });
+                updateOrderNumber(result.text);
                 break;
 
               case "barcodeContent":
-                dispatch({ type: "SET_BARCODE_CONTENT", payload: result.text });
+                dispatch({
+                  type: "SET_ORDER_FORM_CONTENT",
+                  payload: {
+                    ...formContent,
+                    _barcode_content: result.text,
+                  },
+                });
                 break;
 
               case "userId":

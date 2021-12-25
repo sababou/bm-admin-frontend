@@ -68,17 +68,20 @@ function MemberItem({ memberData }) {
 
 const getUserRoleName = (_state) => {
   switch (_state) {
-    case "VALIDATION":
+    case "ROLE_VALIDATION":
       return "Validation";
 
-    case "SHIPMENT":
+    case "ROLE_SHIPPING":
       return "Expédition";
 
-    case "DELIVERY":
+    case "ROLE_DELIVERY":
       return "Livraison";
 
-    case "RETURN":
+    case "ROLE_RETURN":
       return "Retour";
+
+    case "ROLE_CANCELATION":
+      return "Annulation";
 
     default:
       return "";

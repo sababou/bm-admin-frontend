@@ -17,7 +17,7 @@ function StaffMemberList() {
               </button>
             </Link>
 
-            <Link to="/staff-member-list/shipment">
+            <Link to="/staff-member-list/shipping">
               <button className="btn px-5 btn-secondary  m-4 p-4">
                 Expédition
               </button>

@@ -9,9 +9,9 @@ import getToken from "../functions/get/getToken";
 
 import { useEffect } from "react";
 
-import setReturned from "../functions/post/setReturned";
+import setCanceled from "../functions/post/setCanceled";
 
-function ReturnForm() {
+function CancelForm() {
   const dispatch = useDispatch();
 
   const orderFormState = useSelector((state) => state.orderForm);
@@ -23,7 +23,7 @@ function ReturnForm() {
   }, []);
 
   const handleSubmit = () => {
-    setReturned(formContent, dispatch);
+    setCanceled(formContent, dispatch);
   };
 
   return (
@@ -32,7 +32,7 @@ function ReturnForm() {
       <div className="container">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            <h1 className="my-5 text-center">Retour au dépôt</h1>
+            <h1 className="my-5 text-center">Annuler une commande</h1>
 
             <hr />
 
@@ -102,4 +102,4 @@ function ReturnForm() {
   );
 }
 
-export default ReturnForm;
+export default CancelForm;

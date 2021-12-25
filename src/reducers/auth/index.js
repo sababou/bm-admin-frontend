@@ -1,19 +1,21 @@
-const DEFAULT_STATE =  {isLoggedIn: false};
+const DEFAULT_STATE = { isLoggedIn: false };
 
 const sessionReducer = (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
     case "LOGIN":
       return {
         ...state,
-        isLoggedIn: true
+        isLoggedIn: true,
       };
     case "LOGOUT":
       return {
         ...state,
-        isLoggedIn: false
+        isLoggedIn: false,
       };
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export default sessionReducer;
