@@ -10,9 +10,6 @@ const setShipped = (params, dispatch) => {
           type: "SET_ORDER_FORM_SUCCESS",
           payload: true,
         });
-        dispatch({
-          type: "RESET_ORDER_FORM",
-        });
       } else {
         dispatch({
           type: "SET_ORDER_FORM_CURRENT_ERROR",

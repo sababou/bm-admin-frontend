@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const setValidated = (params, dispatch) => {
+import getOrderList from "../get/getOrderList";
+
+const setValidated = (params, dispatch, customerPhone) => {
   axios
     .post("/api/order/set_validated", params)
     .then((res) => {
@@ -13,6 +15,7 @@ const setValidated = (params, dispatch) => {
         dispatch({
           type: "RESET_ORDER_FORM",
         });
+        getOrderList(dispatch, "SAVED", customerPhone);
       } else {
         dispatch({
           type: "SET_ORDER_FORM_CURRENT_ERROR",

@@ -7,8 +7,11 @@ import { useHistory } from "react-router-dom";
 
 import { useParams } from "react-router";
 
+import login from "../Login/functions/post/login";
+
 function QRBarcodeScanner() {
   const orderFormState = useSelector((state) => state.orderForm);
+  const sessionState = useSelector((state) => state.session);
 
   const formContent = orderFormState.formContent;
 
@@ -17,6 +20,14 @@ function QRBarcodeScanner() {
   const dispatch = useDispatch();
 
   const params = useParams();
+
+  const postLogin = (token) => {
+    let params = {
+      _phone: sessionState.userPhone,
+      _token: token,
+    };
+    login(params, dispatch);
+  };
 
   const updateOrderNumber = (orderNumber) => {
     let _orderNumber = orderNumber;
@@ -60,6 +71,10 @@ function QRBarcodeScanner() {
 
               case "userId":
                 dispatch({ type: "SET_USER_ID", payload: result.text });
+                break;
+
+              case "sessionToken":
+                postLogin(result.text);
                 break;
 
               default:

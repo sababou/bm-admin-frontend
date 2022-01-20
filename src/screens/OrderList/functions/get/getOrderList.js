@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getSavedOrders = (dispatch, status, customerPhone) => {
+const getOrderList = (dispatch, status, customerPhone) => {
   let url = "/api/order/list?";
   let hasChanged = false;
 
@@ -38,4 +38,4 @@ const getSavedOrders = (dispatch, status, customerPhone) => {
     });
 };
 
-export default getSavedOrders;
+export default getOrderList;

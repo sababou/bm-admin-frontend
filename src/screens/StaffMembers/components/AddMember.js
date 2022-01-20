@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Navbar from "../../../layout/Navbar";
-import getToken from "../functions/get/getToken";
 import addAnotherMember from "../functions/handlers/addAnotherMember";
 import backToHome from "../functions/handlers/backToHome";
 import addMember from "../functions/post/addMember";
@@ -35,10 +34,6 @@ function AddMember() {
   useEffect(() => {
     console.log(formContent);
   }, [formContent]);
-
-  useEffect(() => {
-    getToken(this.formContent, this.dispatch);
-  }, []);
 
   //////////////////////////////////////////////////////////////////////////////
   //

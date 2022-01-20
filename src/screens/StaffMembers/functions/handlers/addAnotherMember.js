@@ -1,5 +1,3 @@
-import getToken from "../get/getToken";
-
 const addAnotherMember = (formContent, dispatch) => {
   dispatch({
     type: "SET_FORM_CONTENT",
@@ -20,8 +18,6 @@ const addAnotherMember = (formContent, dispatch) => {
     type: "SET_FORM_SUCCESS",
     payload: false,
   });
-
-  getToken(formContent, dispatch);
 };
 
 export default addAnotherMember;

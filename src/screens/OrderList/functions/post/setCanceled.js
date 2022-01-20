@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const setCanceled = (params, dispatch) => {
+import getOrderList from "../get/getOrderList";
+
+const setCanceled = (params, dispatch, status, customerPhone) => {
   axios
-    .post("/api/order/set_canceled", params)
+    .post("/api/order/set_canceled", params, status, customerPhone)
     .then((res) => {
       let data = res.data;
       if (data.status === "OK") {
@@ -13,6 +15,8 @@ const setCanceled = (params, dispatch) => {
         dispatch({
           type: "RESET_ORDER_FORM",
         });
+
+        getOrderList(dispatch, status, customerPhone);
       } else {
         dispatch({
           type: "SET_ORDER_FORM_CURRENT_ERROR",

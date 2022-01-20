@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React, { useEffect } from "react";
 
 import OrderList from "./components/OrderList.js";
@@ -6,14 +5,11 @@ import OrderAction from "./components/OrderAction.js";
 import StaffMemberList from "./components/StaffMemberList.js";
 import Navbar from "../../layout/Navbar.js";
 
-function Home() {
-  useEffect(() => {
-    console.log("Loading Home");
+import { useSelector } from "react-redux";
 
-    // axios.get("/login").then((res) => {
-    //   console.log(res.data);
-    // });
-  }, []);
+function Home() {
+  const sessionState = useSelector((state) => state.session);
+  const userRoles = sessionState.userRoles;
 
   return (
     <>
@@ -21,22 +17,25 @@ function Home() {
         <Navbar />
       </div>
       <div className="container">
-        <h1 className="text-center mt-5">- Accueil Administration -</h1>
-        <h2 className="text-center mt-3 text-secondary mb-5">
-          Bienvenue, Nordine
+        <h2 className="text-center mt-5 text-secondary mb-5">
+          Bienvenue, {sessionState.userName}
         </h2>
         <hr />
       </div>
       <div className="container">
         <OrderAction />
 
-        <hr />
+        {userRoles.includes("ROLE_ADMIN") && (
+          <>
+            <hr />
 
-        <OrderList />
+            <OrderList />
 
-        <hr />
+            <hr />
 
-        <StaffMemberList />
+            <StaffMemberList />
+          </>
+        )}
       </div>
     </>
   );

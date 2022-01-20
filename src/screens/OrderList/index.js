@@ -8,8 +8,7 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import getSavedOrders from "./functions/get/getSavedOrders.js";
-import getToken from "./functions/get/getToken.js";
+import getOrderList from "./functions/get/getOrderList.js";
 
 function Orders(props) {
   const params = useParams();
@@ -24,14 +23,12 @@ function Orders(props) {
   const orders = orderListState.orders;
 
   useEffect(() => {
-    getToken(formContent, dispatch);
-
     dispatch({
       type: "SET_ORDER_LIST_STATUS",
       payload: params.state,
     });
 
-    getSavedOrders(dispatch, params.state, orderListState.customerPhone);
+    getOrderList(dispatch, params.state, orderListState.customerPhone);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

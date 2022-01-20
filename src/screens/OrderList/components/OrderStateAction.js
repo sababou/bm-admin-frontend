@@ -10,6 +10,7 @@ import setCanceled from "../functions/post/setCanceled";
 
 function OrderStateAction({ orderData }) {
   const orderFormState = useSelector((state) => state.orderForm);
+  const orderListState = useSelector((state) => state.orderList);
 
   const formContent = orderFormState.formContent;
 
@@ -22,7 +23,7 @@ function OrderStateAction({ orderData }) {
       _order_id: orderId,
     };
 
-    setValidated(params, dispatch);
+    setValidated(params, dispatch, orderListState.customerPhone);
   };
 
   const handleCancel = (event) => {
@@ -32,7 +33,12 @@ function OrderStateAction({ orderData }) {
       _order_id: orderId,
     };
 
-    setCanceled(params, dispatch);
+    setCanceled(
+      params,
+      dispatch,
+      orderData.status,
+      orderListState.customerPhone
+    );
   };
 
   return (

@@ -8,7 +8,6 @@ const DEFAULT_STATE = {
     { name: "Annuler une commande", value: "ROLE_CANCEL" },
   ],
   formContent: {
-    _token: null,
     _email: null,
     _password: null,
     _name: null,

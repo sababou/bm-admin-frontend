@@ -1,6 +1,5 @@
 const DEFAULT_STATE = {
   formContent: {
-    _token: null,
     _entrusted_to: null,
     _barcode_content: null,
     _order_number: null,
@@ -36,7 +35,7 @@ const OrderFormReducer = (state = DEFAULT_STATE, action = {}) => {
       return {
         ...state,
         formContent: {
-          _token: null,
+          ...state.formContent,
           _entrusted_to: null,
           _barcode_content: null,
           _order_number: null,

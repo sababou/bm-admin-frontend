@@ -5,10 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../../../layout/Navbar";
 
-import getToken from "../functions/get/getToken";
-
-import { useEffect } from "react";
-
 import setReturned from "../functions/post/setReturned";
 
 function ReturnForm() {
@@ -16,11 +12,6 @@ function ReturnForm() {
 
   const orderFormState = useSelector((state) => state.orderForm);
   const formContent = orderFormState.formContent;
-
-  useEffect(() => {
-    getToken(formContent, dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSubmit = () => {
     setReturned(formContent, dispatch);
